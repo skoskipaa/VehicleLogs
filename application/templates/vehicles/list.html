@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+<table>
+    <tr>
+        <th>License plate number</th>
+        <th>Nickname</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>First odometer</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.plate }}</td>
+        <td>{{ vehicle.nickname }}</td>
+        <td>{{ vehicle.make }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td>{{ vehicle.kilometers }}</td>
+        <td>
+            <a href="{{ url_for('logs_form', vehicle_id=vehicle.id) }}">Add a new log for this vehicle</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

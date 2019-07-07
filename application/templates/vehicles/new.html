@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('vehicles_create') }}">
+    <table>
+        <tr>
+            <td>{{ form.plate.label }}</td>
+            <td>{{ form.plate }}</td>
+            <td>
+                <ul>
+                  {% for error in form.plate.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.nickname.label }}</td>
+            <td>{{ form.nickname}}</td>
+            <td>
+                <ul>
+                    {% for error in form.nickname.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.make.label }}</td>
+            <td>{{ form.make }}</td>
+            <td>
+                <ul>
+                    {% for error in form.make.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.model.label }}</td>
+            <td>{{ form.model }}</td>
+            <td>
+                <ul>
+                    {% for error in form.model.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.year.label }}</td>
+            <td>{{ form.year }}</td>
+            <td>
+                <ul>
+                    {% for error in form.year.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.kilometers.label }}</td>
+            <td>{{ form.kilometers }}</td>
+            <td>
+                <ul>
+                    {% for error in form.kilometers.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Add a new vehicle"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

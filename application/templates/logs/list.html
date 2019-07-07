@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>{{ name }}</h1>
+<table>
+    <tr>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Odometer</th>
+        <th>Type</th>
+        <th>Driver</th>
+        <th>Cost</th>
+        <th>Details</th>
+    </tr>
+    {% for log in logs %}
+    <tr>
+        <td>{{ log.vehicle_id }}</td>
+        <td>{{ log.date_created }}</td>
+        <td>{{ log.odometer }}</td>
+        <td>{{ log.log_type }}</td>
+        <td>{{ log.driver_id }}</td>
+        <td>{{ log.cost }}</td>
+        <td>{{ log.details }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

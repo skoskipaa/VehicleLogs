@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>VehicleLogs!</title>
+</head>
+
+<body>
+    {% if current_user.is_authenticated %}
+    <p>Logged in as: {{ current_user.name }}</p>
+    <a href="{{ url_for('auth_logout') }}">Log out!</a>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}">Log in!</a>
+    {% endif %}
+
+    <ul>
+        <li>
+            <a href="{{ url_for('users_create') }}">Create a new user</a>
+        </li>
+        <li>
+            <a href="{{ url_for('users_index') }}">List all users</a>
+        </li>
+        <li>
+            <a href="{{ url_for('vehicles_form') }}">Add a vehicle</a>
+        </li>
+        <li>
+            <a href="{{ url_for('logs_index') }}">Show all logs</a>
+        </li>
+        <li>
+            <a href="{{ url_for('vehicles_index') }}">Show all vehicles</a>
+        </li>
+    </ul>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block body %}
+
+        {% endblock %}
+</body>
+
+</html>

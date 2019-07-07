@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Add a new log for {{ name }}</h1>
+<form method="POST" action="{{ url_for('logs_create', vehicle_id=vehicle_id) }}">
+    <table>
+        <tr>
+            <td>{{ form.log_type.label }}</td>
+            <td>{{ form.log_type }}</td>
+            <td>
+                <ul>
+                    {% for error in form.log_type.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.odometer.label }}</td>
+            <td>{{ form.odometer }}</td>
+            <td>
+                <ul>
+                    {% for error in form.odometer.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.cost.label }}</td>
+            <td>{{ form.cost }}</td>
+            <td>
+                <ul>
+                    {% for error in form.cost.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form.details.label }}</td>
+            <td>{{ form.details }}</td>
+            <td>
+                <ul>
+                    {% for error in form.details.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Add" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

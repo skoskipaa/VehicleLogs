@@ -1,35 +1,40 @@
 # VehicleLogs (Python & Flask)
 
-Pieni ajopäiväkirjasovellus ([ot-harjoitustyö](https://github.com/skoskipaa/ot-harjoitustyo) Javalla) toteutettuna harjoituksen vuoksi ja omaksi iloksi myös Pythonilla ja Flaskilla.
+Pieni ajopäiväkirjasovellus (kuten [ot-harjoitustyö](https://github.com/skoskipaa/ot-harjoitustyo) Javalla) toteutettuna harjoituksen vuoksi ja omaksi iloksi myös Pythonilla ja Flaskilla. Sovellukseen voi syöttää ajoneuvoja ja lisätä niille tapahtumia.
 
 ## Tämänhetkiset toiminnallisuudet
 
-* Käyttäjätilin luominen
-* Kirjautuminen
-* Ajoneuvon lisäys
-* Ajoneuvojen listaus
-* Tapahtuman lisäys ajoneuvolle
-* Ajoneuvon tapahtumien listaus
-* Kaikkien tapahtumien listaus
-* Käyttäjien listaus
+### Käyttäjä (USER) voi
 
+      * Kirjautua sisään
+      * Hakea ajoneuvojen listauksen
+      * Luoda uuden tapahtuman ajoneuvolle
+      * Kirjautua ulos
+      
+### Ylläpitäjä (ADMIN) voi näiden toiminnallisuuksien lisäksi
+
+      * Luoda uuden käyttäjän
+      * Luoda uuden ajoneuvon
+      * Listata kaikki käyttäjät
+      * Listata kaikki tapahtumat
+      
 ## Suunnitellut toiminnallisuudet
 
 ### Kirjautunut käyttäjä (USER) voi 
+
     * Muuttaa salasanansa
-    * Lisätä ajoneuvolle tapahtuman
     * Listata omat kirjauksensa
-    * Kirjautua ulos
     
 ### Kirjautunut ylläpitäjä (ADMIN) voi
-    * Lisätä, poistaa ja muokata käyttäjiä
-    * Lisätä, poistaa ja muokata ajoneuvoja
-    * Lisätä, poistaa ja muokata tapahtumia
-    * Listata kaikki tapahtumat
-    * Listata tietyn ajoneuvon tapahtumat
-    * Tulostaa tilastotietoja
-    * Kirjautua ulos
-    
-## Bugit
 
-Lomakkeiden syötteet on validoitu, mutta kilometrisyöttöön on vielä mahdollista syöttää edellistä lukemaa pienempi luku.
+    * Poistaa ja muokata käyttäjiä
+    * Poistaa ja muokata ajoneuvoja
+    * Poistaa ja muokata tapahtumia
+    * Listata tietyn ajoneuvon tapahtumat
+    * Tulostaa tilastotietoja ja raportteja
+    
+## Bugit ja heikkoudet/kehitysideat
+
+* Lomakkeiden syötteet on validoitu, mutta kilometrisyöttöön on vielä mahdollista syöttää edellistä lukemaa pienempi luku. 
+* Flask-Loginin käyttö lienee turhaa kirjautumisten hallinnassa, koska samat toiminnallisuudet olisi voitu toteuttaa myös pelkällä Flask-Userilla, jonka myös otin käyttöön käyttäjäroolien hallintaa varten.
+

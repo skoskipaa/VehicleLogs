@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, validators
+from wtforms import PasswordField, StringField, SelectField, validators
 
 
 class LoginForm(FlaskForm):
@@ -15,6 +15,7 @@ class UserForm(FlaskForm):
     username = StringField("Username", [validators.Length(min=4, max=50)])
     password = PasswordField("Password", [validators.Length(min=8, max=50)])
     password_conf = PasswordField("Confirm password", [validators.Length(min=8, max=50)])
+    role = SelectField("Role", choices=[("ADMIN", "ADMIN"), ("USER", "USER")], default="USER")
 
     class Meta:
         csrf = False

@@ -22,6 +22,7 @@ from application.logs import models
 from application.logs import views
 
 from application.auth.models import User
+from application.auth.models import Role
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -32,9 +33,27 @@ login_manager.init_app(app)
 login_manager.login_view = "auth_login"
 login_manager.login_message = "Please, login to use this functionality."
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 
+from flask_user import UserManager, SQLAlchemyAdapter
+
+db_adapter = SQLAlchemyAdapter(db, User)
+user_manager = UserManager(db_adapter, app)
+
+
 db.create_all()
+
+if not User.query.filter_by(username='akuankka').first():
+    name = 'Aku Ankka'
+    username = 'akuankka'
+    pwd = 'akuankka'
+    user1 = User(name, username, pwd)
+    user1.roles.append(Role(name='ADMIN'))
+
+    db.session().add(user1)
+    db.session().commit()
+

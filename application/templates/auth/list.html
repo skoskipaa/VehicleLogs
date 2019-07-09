@@ -5,11 +5,16 @@
     <tr>
         <th>Name</th>
         <th>Username</th>
+        <th>Role</th>
     </tr>
     {% for person in users %}
     <tr>
         <td>{{ person.name }}</td>
         <td>{{ person.username }}</td>
+        <td>{% for role in person.roles %}
+            <body>{{ role.name }}</body>
+            {% endfor %}
+        </td>
     </tr>
     {% endfor %}
 </table>

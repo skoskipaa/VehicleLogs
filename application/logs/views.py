@@ -1,6 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from flask_user import roles_required
 
 from application.logs.models import Log
 from application.logs.forms import LogForm
@@ -12,6 +13,7 @@ from application.vehicles.models import Vehicle
 
 
 @app.route("/logs/")
+@roles_required('ADMIN')
 def logs_index():
     logs = Log.query.all()
     return render_template("logs/list.html", logs=logs, name="All")
@@ -24,6 +26,7 @@ def logs_form(vehicle_id):
 
 
 @app.route("/logs/<vehicle_id>", methods=["GET"])
+@roles_required('ADMIN')
 def logs_for_vehicle(vehicle_id):
     logs = Log.query.filter_by(vehicle_id=vehicle_id).all()
     v = Vehicle.query.get_or_404(vehicle_id)

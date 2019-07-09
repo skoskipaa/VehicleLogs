@@ -69,3 +69,4 @@ venv.bak/
 dmypy.json
 .pyre/
 vehiclelogs.db
+.vscode/

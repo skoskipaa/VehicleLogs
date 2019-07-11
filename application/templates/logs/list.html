@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>{{ name }}</h1>
-<table>
+<div class="container>">
+    <h2>Logs for {{ name }}</h2>
+
+<table class="table table-striped">
+    <thead>
     <tr>
         <th>Vehicle</th>
         <th>Date</th>
@@ -11,6 +14,8 @@
         <th>Cost</th>
         <th>Details</th>
     </tr>
+    </thead>
+    <tbody>
     {% for log in logs %}
     <tr>
         <td>{{ log.vehicle_id }}</td>
@@ -22,5 +27,7 @@
         <td>{{ log.details }}</td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
+</div>
 {% endblock %}

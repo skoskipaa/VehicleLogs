@@ -1,58 +1,55 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Add a new log for {{ name }}</h1>
-<form method="POST" action="{{ url_for('logs_create', vehicle_id=vehicle_id) }}">
-    <table>
-        <tr>
-            <td>{{ form.log_type.label }}</td>
-            <td>{{ form.log_type }}</td>
-            <td>
-                <ul>
-                    {% for error in form.log_type.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>{{ form.odometer.label }}</td>
-            <td>{{ form.odometer }}</td>
-            <td>
-                <ul>
+<div class="container">
+    <center>
+        <h2>Add a new event for {{ name }}</h2>
+        <span><strong>Last odometer reading {{ last_odo }}</strong></span>
+    </center>
+</div>
+
+<div class="container">
+    <div class="row align-items justify-content-center">
+        <div class="col-md-d">
+            <form action="{{ url_for('logs_create', vehicle_id=vehicle_id) }}" method="POST" role="form">
+                <div class="form-group">
+                    <label for="log_type">Log type</label>
+                    <select class="form-control" id="log_type" name="log_type">
+                        <option>Drive</option>
+                        <option>Maintenance</option>
+                        <option>Fill up</option>
+                    </select>
+                    <br>
+                    <label for="odometer">Odometer</label>
+                    <input type="number" class="form-control" id="odometer" name="odometer" placeholder="Odometer">
                     {% for error in form.odometer.errors %}
-                    <li>{{ error }}</li>
+                        <div class="alert alert-danger">
+                            <span>{{ error }}</span>
+                        </div>
                     {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>{{ form.cost.label }}</td>
-            <td>{{ form.cost }}</td>
-            <td>
-                <ul>
+                    <br>
+                    <label for="cost">Total cost</label>
+                    <input type="number" value="0" min=0 class="form-control" id="cost" name="cost">
                     {% for error in form.cost.errors %}
-                    <li>{{ error }}</li>
+                        <div class="alert alert-danger">
+                            <span>{{ error }}</span>
+                        </div>
                     {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>{{ form.details.label }}</td>
-            <td>{{ form.details }}</td>
-            <td>
-                <ul>
+                    <br>
+                    <label for="details">Details</label>
+                    <input type="text" class="form-control" id="details" name="details" placeholder="Details">
                     {% for error in form.details.errors %}
-                    <li>{{ error }}</li>
+                        <div class="alert alert-danger">
+                            <span>{{ error }}</span>
+                        </div>
                     {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Add" />
-            </td>
-        </tr>
-    </table>
-</form>
+                    <br>
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-primary">Submit!</button>
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

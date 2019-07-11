@@ -1,21 +1,31 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Users</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Role</th>
-    </tr>
-    {% for person in users %}
-    <tr>
-        <td>{{ person.name }}</td>
-        <td>{{ person.username }}</td>
-        <td>{% for role in person.roles %}
-            <body>{{ role.name }}</body>
+<div class="container">
+    <h2>Users</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in users %}
+            <tr>
+                <td>{{ person.id }}</td>
+                <td>{{ person.name }}</td>
+                <td>{{ person.username }}</td>
+                <td>{% for role in person.roles %}
+
+                    <body>{{ role.name }}</body>
+                    {% endfor %}
+                </td>
+            </tr>
             {% endfor %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+        </tbody>
+    </table>
+</div>
 {% endblock %}

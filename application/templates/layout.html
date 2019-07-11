@@ -26,13 +26,14 @@
                         Menu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ url_for('vehicles_index') }}">Show all vehicles</a>
-                    {% if current_user.is_admin() %}
-                    <a class="dropdown-item" href="{{ url_for('users_create') }}">Create a new user</a>
-                    <a class="dropdown-item" href="{{ url_for('users_index') }}">List all users</a>
-                    <a class="dropdown-item" href="{{ url_for('vehicles_form') }}">Add a vehicle</a>
-                    <a class="dropdown-item" href="{{ url_for('logs_index') }}">Show all logs</a>
-                    {% endif %}
+                        <a class="dropdown-item" href="{{ url_for('vehicles_index') }}">Show all vehicles</a>
+                        <a class="dropdown-item" href="{{ url_for('logs_for_user') }}">Show my logs</a>
+                        {% if current_user.is_admin() %}
+                        <a class="dropdown-item" href="{{ url_for('users_create') }}">Create a new user</a>
+                        <a class="dropdown-item" href="{{ url_for('users_index') }}">List all users</a>
+                        <a class="dropdown-item" href="{{ url_for('vehicles_form') }}">Add a vehicle</a>
+                        <a class="dropdown-item" href="{{ url_for('logs_index') }}">Show all logs</a>
+                        {% endif %}
                     </div>
                 </li>
             </ul>

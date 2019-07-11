@@ -6,23 +6,23 @@ from flask_user import roles_required
 from application.logs.models import Log
 from application.logs.forms import LogForm
 from application.vehicles.models import Vehicle
-
-# Logien haku kuljettajalle
-# Käyttäjien haku (adminille)
-# Kannattaisiko logitauluun tallettaa myös kuskin nimi? (denorm.)
+from application.auth.models import User
 
 
 @app.route("/logs/")
 @roles_required('ADMIN')
 def logs_index():
-    logs = Log.query.all()
+    logs = Log.query.order_by(Log.vehicle_id.asc()).all()
     return render_template("logs/list.html", logs=logs, name="All")
 
 
 @app.route("/logs/<vehicle_id>/new/")
 def logs_form(vehicle_id):
     veh = Vehicle.query.get(vehicle_id)
-    return render_template("logs/new.html", form=LogForm(), vehicle_id=veh.id, name=veh.plate)
+    last_log = Log.query.filter_by(vehicle_id=vehicle_id).order_by(Log.odometer.desc()).first()
+    last_odo = last_log.odometer
+    return render_template("logs/new.html", form=LogForm(), vehicle_id=veh.id,
+                           name=veh.plate, last_odo=last_odo)
 
 
 @app.route("/logs/<vehicle_id>", methods=["GET"])
@@ -45,6 +45,15 @@ def logs_create(vehicle_id):
     log_type = form.log_type.data
     odometer = form.odometer.data
 
+    last_log = Log.query.filter_by(vehicle_id=vehicle_id).order_by(Log.odometer.desc()).first()
+    last_odo = last_log.odometer
+
+    if last_odo > odometer:
+        flash("Check odometer reading. (Must be greater or equal than last.)",
+              category="warning")
+        return render_template("logs/new.html", form=form,
+                               vehicle_id=vehicle_id, last_odo=last_odo)
+
     driver_id = current_user.id
 
     l = Log(log_type, odometer, driver_id, vehicle_id)
@@ -54,5 +63,13 @@ def logs_create(vehicle_id):
     db.session().add(l)
     db.session().commit()
 
-    return redirect(url_for("logs_for_vehicle", vehicle_id=vehicle_id))
+    return redirect(url_for("vehicles_index"))
 
+@app.route("/logs/user/")
+@login_required
+def logs_for_user():
+
+    logs = Log.query.filter_by(driver_id=current_user.id).all()
+    u = User.query.get_or_404(current_user.id)
+
+    return render_template("logs/list.html", logs=logs, name=u.name)
